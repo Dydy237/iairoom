@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find Rooms - KMER ROOM</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-green: #2ecc71;
+            --dark-green: #27ae60;
+            --light-bg: #f8f9fa;
+        }
+        
+        body {
+            background-color: var(--light-bg);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+        }
+        
+        .navbar {
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+            color: var(--primary-green) !important;
+        }
+        
+        .hero-section {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('images/593704008.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .filter-section {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            margin-bottom: 30px;
+        }
+        
+        .room-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s;
+            height: 100%;
+        }
+        
+        .room-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .room-image {
+            height: 200px;
+            object-fit: cover;
+            width: 100%;
+        }
+        
+        .room-price {
+            color: var(--primary-green);
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+        
+        .room-location {
+            color: #6c757d;
+        }
+        
+        .room-features {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .room-features li {
+            display: inline-block;
+            margin-right: 15px;
+            color: #6c757d;
+        }
+        
+        .room-features i {
+            color: var(--primary-green);
+            margin-right: 5px;
+        }
+        
+        .btn-view {
+            background-color: var(--primary-green);
+            color: white;
+            border: none;
+            transition: all 0.3s;
+        }
+        
+        .btn-view:hover {
+            background-color: var(--dark-green);
+            transform: translateY(-2px);
+        }
+        
+        .area-badge {
+            background-color: var(--primary-green);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-right: 5px;
+            margin-bottom: 5px;
+            display: inline-block;
+            cursor: pointer;
+        }
+        
+        .area-badge:hover {
+            background-color: var(--dark-green);
+        }
+        
+        .modal-content {
+            border-radius: 15px;
+            overflow: hidden;
+        }
+        
+        .modal-image {
+            height: 250px;
+            object-fit: cover;
+            width: 100%;
+        }
+        
+        .modal-price {
+            color: var(--primary-green);
+            font-weight: 700;
+            font-size: 1.8rem;
+        }
+        
+        .feature-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(46, 204, 113, 0.1);
+            border-radius: 50%;
+            text-align: center;
+            line-height: 40px;
+            color: var(--primary-green);
+            margin-right: 15px;
+        }
+        
+        .pagination {
+            justify-content: center;
+            margin-top: 30px;
+        }
+        
+        .page-link {
+            color: var(--primary-green);
+        }
+        
+        .page-item.active .page-link {
+            background-color: var(--primary-green);
+            border-color: var(--primary-green);
+        }
+        
+        footer {
+            background: #333;
+            color: white;
+            padding: 40px 0 20px;
+            margin-top: 60px;
+        }
+        
+        .logo {
+            height: 40px;
+            width: 40px;
+            object-fit: contain;
+            border-radius: 8px;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="images/Generated Image September 09, 2025 - 2_11PM(1)(1).png" alt="KMER ROOM Logo" class="logo">KMER ROOM
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <h1 class="display-4 fw-bold">Find Your Perfect Room</h1>
+            <p class="lead">Browse through hundreds of available rooms in Yaoundé's best neighborhoods</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Filter Section -->
+        <div class="filter-section">
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="areaFilter" class="form-label">Filter by Area</label>
+                    <div>
+                        <span class="area-badge" data-area="all">All Areas</span>
+                        <span class="area-badge" data-area="awae">Awae Escalier</span>
+                        <span class="area-badge" data-area="ekounou">Ekounou</span>
+                        <span class="area-badge" data-area="monti">Monti</span>
+                        <span class="area-badge" data-area="carriere">Carriere</span>
+                        <span class="area-badge" data-area="manassa">Manassa</span>
+                        <span class="area-badge" data-area="abang">Abang</span>
+                        <span class="area-badge" data-area="nkoabang">Nkoabang</span>
+                        <span class="area-badge" data-area="biteng">Biteng</span>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <label for="priceRange" class="form-label">Price Range</label>
+                    <input type="range" class="form-range" id="priceRange" min="10000" max="50000" step="5000">
+                    <div class="d-flex justify-content-between">
+                        <span>10,000 FCFA</span>
+                        <span id="selectedPrice">30,000 FCFA</span>
+                        <span>50,000 FCFA</span>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <label for="sortBy" class="form-label">Sort By</label>
+                    <select class="form-select" id="sortBy">
+                        <option value="newest">Newest First</option>
+                        <option value="priceLow">Price: Low to High</option>
+                        <option value="priceHigh">Price: High to Low</option>
+                        <option value="popular">Most Popular</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- Rooms Listing -->
+        <h2 class="mb-4">Available Rooms</h2>
+        <div class="row" id="roomsContainer">
+            <!-- Room cards will be dynamically generated here -->
+        </div>
+
+        <!-- Pagination -->
+        <nav aria-label="Room pagination">
+            <ul class="pagination">
+                <li class="page-item disabled">
+                    <a class="page-link" href="#" tabindex="-1">Previous</a>
+                </li>
+                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item">
+                    <a class="page-link" href="#">Next</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- Room Detail Modal -->
+    <div class="modal fade" id="roomModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="roomModalLabel">Room Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <img src="" class="modal-image" id="modalImage" alt="Room image" style="cursor:pointer;">
+                            <div class="d-flex mt-3" id="modalThumbnails">
+                                <img src="images/_img_1_640x480.jpg" class="img-thumbnail me-2" width="80" height="60" alt="Thumbnail">
+                                <img src="images/5c9e6477dae6f1553884279bejhooj23451553884279.jpg" class="img-thumbnail me-2" width="80" height="60" alt="Thumbnail">
+                                <img src="images/5d0eb2677de0b1561244263bejhooj23451561244263.jpg" class="img-thumbnail" width="80" height="60" alt="Thumbnail">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <h3 class="modal-price" id="modalPrice">30,000 FCFA</h3>
+                            <p class="room-location" id="modalLocation"><i class="fas fa-map-marker-alt"></i> Awae Escalier, Yaoundé</p>
+                            <p id="modalDescription">Spacious room with attached bathroom and balcony. Perfect for students and young professionals. Quiet neighborhood with easy access to transportation.</p>
+                            
+                            <div class="room-features mb-3">
+                                <h5>Features</h5>
+                                <div class="d-flex align-items-center mb-2">
+                                    <div class="feature-icon">
+                                        <i class="fas fa-bed"></i>
+                                    </div>
+                                    <div>
+                                        <strong>Bedroom:</strong> <span id="modalBedroom">1</span>
+                                    </div>
+                                </div>
+                                <div class="d-flex align-items-center mb-2">
+                                    <div class="feature-icon">
+                                        <i class="fas fa-bath"></i>
+                                    </div>
+                                    <div>
+                                        <strong>Bathroom:</strong> <span id="modalBathroom">1</span> (Attached)
+                                    </div>
+                                </div>
+                                <div class="d-flex align-items-center mb-2">
+                                    <div class="feature-icon">
+                                        <i class="fas fa-ruler-combined"></i>
+                                    </div>
+                                    <div>
+                                        <strong>Size:</strong> <span id="modalSize">20</span> m²
+                                    </div>
+                                </div>
+                                <div class="d-flex align-items-center mb-2">
+                                    <div class="feature-icon">
+                                        <i class="fas fa-utensils"></i>
+                                    </div>
+                                    <div>
+                                        <strong>Kitchen:</strong> <span id="modalKitchen">Shared</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <h5>Availability</h5>
+                                <p id="modalAvailability">Immediate</p>
+                            </div>
+                            
+                            <div id="modalPhoneContainer" class="d-none">
+                                <h5>Contact Landlord</h5>
+                                <p><i class="fas fa-phone me-2"></i> <span id="modalPhone">+237 6XX XXX XXX</span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-success" id="openBookVisit">Book a Visit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Book Visit Modal -->
+
+        <!-- Image Gallery Modal -->
+        <div class="modal fade" id="imageGalleryModal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Room Images</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body text-center">
+                        <img id="galleryMainImage" src="" class="img-fluid rounded mb-3" style="max-height:400px;object-fit:contain;">
+                        <div class="d-flex justify-content-center gap-2" id="galleryThumbnails"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <div class="modal fade" id="bookVisitModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Book a Visit</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="visitForm">
+                        <div class="mb-3">
+                            <label for="visitDate" class="form-label">Preferred Date</label>
+                            <input type="date" class="form-control" id="visitDate" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="visitTime" class="form-label">Preferred Time</label>
+                            <select class="form-select" id="visitTime" required>
+                                <option value="">Select a time</option>
+                                <option value="09:00">9:00 AM</option>
+                                <option value="10:00">10:00 AM</option>
+                                <option value="11:00">11:00 AM</option>
+                                <option value="14:00">2:00 PM</option>
+                                <option value="15:00">3:00 PM</option>
+                                <option value="16:00">4:00 PM</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="visitorName" class="form-label">Your Full Name</label>
+                            <input type="text" class="form-control" id="visitorName" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="visitorPhone" class="form-label">Phone Number</label>
+                            <input type="tel" class="form-control" id="visitorPhone" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="visitorMessage" class="form-label">Additional Message (Optional)</label>
+                            <textarea class="form-control" id="visitorMessage" rows="3"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-success" onclick="submitVisitRequest()">Submit Request</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <h5>KMER ROOM</h5>
+                    <p>The leading platform for room rentals and property listings in Cameroon.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-2 mb-4">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="index.html" class="text-white">Home</a></li>
+                        <li><a href="findrooms.html" class="text-white">Find Rooms</a></li>
+                        <li><a href="listproperty.html" class="text-white">List Property</a></li>
+                        <li><a href="about.html" class="text-white">About Us</a></li>
+                        <li><a href="contact.html" class="text-white">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <h5>Contact Info</h5>
+                    <ul class="list-unstyled">
+                        <li><i class="fas fa-map-marker-alt me-2"></i> Jouvence, Yaoundé</li>
+                        <li><i class="fas fa-phone me-2"></i> +237 620 231 401</li>
+                        <li><i class="fas fa-envelope me-2"></i> kmerroom@room.org</li>
+                    </ul>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <h5>Newsletter</h5>
+                    <p>Subscribe to get updates on new properties</p>
+                    <div class="input-group">
+                        <input type="email" class="form-control" placeholder="Your Email">
+                        <button class="btn btn-success" type="button">Subscribe</button>
+                    </div>
+                </div>
+            </div>
+            <hr class="bg-light">
+            <div class="text-center py-3">
+                <p class="mb-0">&copy; 2025 KMER ROOM. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Sample room data
+        const rooms = [
+            {
+                id: 1,
+                image: "images/1000195131.webp",
+                price: 25000,
+                location: "Awae Escalier",
+                title: "Cozy Room with Balcony",
+                description: "Spacious room with attached bathroom and balcony. Perfect for students and young professionals.",
+                bedroom: 1,
+                bathroom: 1,
+                size: 20,
+                kitchen: "Shared",
+                availability: "Immediate",
+                phone: "+237 677 123 456"
+            },
+            {
+                id: 2,
+                image: "images/20221209110725-ch1.jpg",
+                price: 35000,
+                location: "Ekounou",
+                title: "Modern Studio Apartment",
+                description: "Newly renovated studio apartment with private kitchenette and bathroom. Secure compound.",
+                bedroom: 1,
+                bathroom: 1,
+                size: 25,
+                kitchen: "Private",
+                availability: "Next Week",
+                phone: "+237 677 234 567"
+            },
+            {
+                id: 3,
+                image: "images/593704008.jpg",
+                price: 15000,
+                location: "Monti",
+                title: "Economy Single Room",
+                description: "Affordable room in a shared apartment. Great for students on a budget. Close to university.",
+                bedroom: 1,
+                bathroom: 1,
+                size: 15,
+                kitchen: "Shared",
+                availability: "Immediate",
+                phone: "+237 677 345 678"
+            },
+            {
+                id: 4,
+                image: "images/593704071.jpg",
+                price: 45000,
+                location: "Carriere",
+                title: "Luxury Master Bedroom",
+                description: "Large master bedroom with walk-in closet and en-suite bathroom. In a modern apartment complex.",
+                bedroom: 1,
+                bathroom: 1,
+                size: 30,
+                kitchen: "Shared",
+                availability: "Immediate",
+                phone: "+237 677 456 789"
+            },
+            {
+                id: 5,
+                image: "images/5e6319cb.avif",
+                price: 30000,
+                location: "Manassa",
+                title: "Furnished Room with AC",
+                description: "Fully furnished room with air conditioning. Includes bed, desk, and wardrobe. Secure area.",
+                bedroom: 1,
+                bathroom: 1,
+                size: 18,
+                kitchen: "Shared",
+                availability: "Next Month",
+                phone: "+237 677 567 890"
+            },
+            {
+                id: 6,
+                image: "images/MG_20190928_154910_4.jpg",
+                price: 20000,
+                location: "Abang",
+                title: "Simple Room Near Market",
+                description: "Basic room in a quiet neighborhood. Close to market and transportation. Water and electricity included.",
+                bedroom: 1,
+                bathroom: 1,
+                size: 16,
+                kitchen: "Shared",
+                availability: "Immediate",
+                phone: "+237 677 678 901"
+            },
+            {
+                id: 7,
+                image: "images/_img_1_640x480.jpg",
+                price: 40000,
+                location: "Nkoabang",
+                title: "Spacious Room with View",
+                description: "Large room with beautiful view of the city. Quiet area with friendly neighbors. Parking available.",
+                bedroom: 1,
+                bathroom: 1,
+                size: 22,
+                kitchen: "Shared",
+                availability: "Immediate",
+                phone: "+237 677 789 012"
+            },
+            {
+                id: 8,
+                image: "images/5c9e6477dae6f1553884279bejhooj23451553884279.jpg",
+                price: 50000,
+                location: "Biteng",
+                title: "Premium Room with Services",
+                description: "High-end room in serviced apartment. Includes cleaning and laundry services. Gym access included.",
+                bedroom: 1,
+                bathroom: 1,
+                size: 28,
+                kitchen: "Private",
+                availability: "Next Week",
+                phone: "+237 677 890 123"
+            }
+        ];
+
+        // Initialize the page with rooms
+        document.addEventListener('DOMContentLoaded', function() {
+            renderRooms(rooms);
+            
+            // Price range filter
+            const priceRange = document.getElementById('priceRange');
+            const selectedPrice = document.getElementById('selectedPrice');
+            
+            priceRange.addEventListener('input', function() {
+                selectedPrice.textContent = Number(this.value).toLocaleString() + ' FCFA';
+                filterRooms();
+            });
+            
+            // Area filter
+            const areaBadges = document.querySelectorAll('.area-badge');
+            areaBadges.forEach(badge => {
+                badge.addEventListener('click', function() {
+                    // Remove active class from all badges
+                    areaBadges.forEach(b => b.classList.remove('active'));
+                    // Add active class to clicked badge
+                    this.classList.add('active');
+                    filterRooms();
+                });
+            });
+            
+            // Sort by filter
+            const sortBy = document.getElementById('sortBy');
+            sortBy.addEventListener('change', filterRooms);
+        });
+
+        // Render rooms function
+        function renderRooms(roomsToRender) {
+            const roomsContainer = document.getElementById('roomsContainer');
+            roomsContainer.innerHTML = '';
+            
+            if (roomsToRender.length === 0) {
+                roomsContainer.innerHTML = `
+                    <div class="col-12 text-center py-5">
+                        <i class="fas fa-search fa-3x mb-3 text-muted"></i>
+                        <h3 class="text-muted">No rooms found</h3>
+                        <p>Try adjusting your filters to see more results.</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            roomsToRender.forEach(room => {
+                const roomCard = `
+                    <div class="col-md-6 col-lg-3 mb-4">
+                        <div class="room-card">
+                            <img src="${room.image}" class="room-image" alt="${room.title}">
+                            <div class="p-3">
+                                <div class="room-price">${room.price.toLocaleString()} FCFA</div>
+                                <h5 class="mt-2">${room.title}</h5>
+                                <p class="room-location"><i class="fas fa-map-marker-alt"></i> ${room.location}</p>
+                                <p class="text-truncate">${room.description}</p>
+                                <ul class="room-features">
+                                    <li><i class="fas fa-bed"></i> ${room.bedroom} Bed</li>
+                                    <li><i class="fas fa-bath"></i> ${room.bathroom} Bath</li>
+                                </ul>
+                                <button class="btn btn-view w-100" onclick="showRoomDetails(${room.id})">
+                                    View Details
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                roomsContainer.innerHTML += roomCard;
+            });
+        }
+
+        // Filter rooms based on selected criteria
+        function filterRooms() {
+            const priceRange = document.getElementById('priceRange');
+            const maxPrice = parseInt(priceRange.value);
+            
+            const activeAreaBadge = document.querySelector('.area-badge.active');
+            const selectedArea = activeAreaBadge ? activeAreaBadge.getAttribute('data-area') : 'all';
+            
+            const sortBy = document.getElementById('sortBy').value;
+            
+            let filteredRooms = rooms.filter(room => room.price <= maxPrice);
+            
+            if (selectedArea !== 'all') {
+                filteredRooms = filteredRooms.filter(room => 
+                    room.location.toLowerCase().includes(selectedArea.toLowerCase()));
+            }
+            
+            // Apply sorting
+            switch(sortBy) {
+                case 'priceLow':
+                    filteredRooms.sort((a, b) => a.price - b.price);
+                    break;
+                case 'priceHigh':
+                    filteredRooms.sort((a, b) => b.price - a.price);
+                    break;
+                case 'newest':
+                default:
+                    // Default sorting (by id as proxy for newest)
+                    filteredRooms.sort((a, b) => b.id - a.id);
+                    break;
+            }
+            
+            renderRooms(filteredRooms);
+        }
+
+        // Show room details in modal
+        function showRoomDetails(roomId) {
+            const room = rooms.find(r => r.id === roomId);
+            if (!room) return;
+            // Populate modal with room data
+            document.getElementById('modalImage').src = room.image;
+            document.getElementById('modalPrice').textContent = room.price.toLocaleString() + ' FCFA';
+            document.getElementById('modalLocation').innerHTML = `<i class="fas fa-map-marker-alt"></i> ${room.location}, Yaoundé`;
+            document.getElementById('modalDescription').textContent = room.description;
+            document.getElementById('modalBedroom').textContent = room.bedroom;
+            document.getElementById('modalBathroom').textContent = room.bathroom;
+            document.getElementById('modalSize').textContent = room.size;
+            document.getElementById('modalKitchen').textContent = room.kitchen;
+            document.getElementById('modalAvailability').textContent = room.availability;
+            document.getElementById('modalPhone').textContent = room.phone;
+            // Hide phone by default, show only after booking
+            document.getElementById('modalPhoneContainer').classList.add('d-none');
+            // Hide phone section always until booking
+            // Show the modal
+            const roomModal = new bootstrap.Modal(document.getElementById('roomModal'));
+            roomModal.show();
+            // Image gallery logic
+            const images = [room.image, 'images/5c9e6477dae6f1553884279bejhooj23451553884279.jpg', 'images/5d0eb2677de0b1561244263bejhooj23451561244263.jpg'];
+            document.getElementById('modalImage').onclick = function() {
+                showImageGallery(images, room.image);
+            };
+            // Thumbnails click
+            const thumbs = document.querySelectorAll('#modalThumbnails img');
+            thumbs.forEach((thumb, idx) => {
+                thumb.onclick = function() {
+                    showImageGallery(images, images[idx]);
+                };
+            });
+            // Book visit button
+            document.getElementById('openBookVisit').onclick = function() {
+                const bookVisitModal = new bootstrap.Modal(document.getElementById('bookVisitModal'));
+                bookVisitModal.show();
+            };
+
+        }
+
+        // Show image gallery modal
+        function showImageGallery(images, selected) {
+            const galleryModal = new bootstrap.Modal(document.getElementById('imageGalleryModal'));
+            const mainImg = document.getElementById('galleryMainImage');
+            const thumbs = document.getElementById('galleryThumbnails');
+            mainImg.src = selected;
+            thumbs.innerHTML = '';
+            images.forEach(img => {
+                const thumb = document.createElement('img');
+                thumb.src = img;
+                thumb.className = 'img-thumbnail me-2';
+                thumb.style.width = '70px';
+                thumb.style.height = '60px';
+                thumb.style.objectFit = 'cover';
+                if (img === selected) thumb.classList.add('border-primary');
+                thumb.onclick = () => {
+                    mainImg.src = img;
+                    document.querySelectorAll('#galleryThumbnails img').forEach(t => t.classList.remove('border-primary'));
+                    thumb.classList.add('border-primary');
+                };
+                thumbs.appendChild(thumb);
+            });
+            galleryModal.show();
+        }
+
+        // Submit visit request
+        function submitVisitRequest() {
+            alert('Visit request submitted successfully! The landlord number is now visible. The landlord will contact you to confirm the appointment.');
+            // Show phone number
+            document.getElementById('modalPhoneContainer').classList.remove('d-none');
+            // Close book visit modal only
+            const bookVisitModal = bootstrap.Modal.getInstance(document.getElementById('bookVisitModal'));
+            bookVisitModal.hide();
+            // Reset form
+            document.getElementById('visitForm').reset();
+        }
+    </script>
+</body>
+</html>

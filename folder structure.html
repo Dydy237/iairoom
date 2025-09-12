@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KMER ROOM - PHP Project Structure</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+            padding: 20px;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 10px 10px 0 0;
+            margin-bottom: 20px;
+        }
+        
+        .folder-structure {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .folder {
+            color: #2ecc71;
+            font-weight: bold;
+            margin-left: 20px;
+        }
+        
+        .file {
+            color: #3498db;
+            margin-left: 40px;
+        }
+        
+        .phase-card {
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            transition: transform 0.3s;
+        }
+        
+        .phase-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .badge-phase {
+            background-color: #2ecc71;
+            color: white;
+        }
+        
+        .tech-stack {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            padding: 20px;
+        }
+        
+        .tech-item {
+            margin-bottom: 15px;
+            padding: 10px;
+            border-radius: 8px;
+            background: #f8f9fa;
+        }
+        
+        h2 {
+            color: #27ae60;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e9ecef;
+        }
+        
+        .structure-container {
+            max-height: 500px;
+            overflow-y: auto;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header text-center">
+            <h1 class="display-4">KMER ROOM</h1>
+            <p class="lead">PHP Bootstrap Project Structure</p>
+        </div>
+        
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="folder-structure">
+                    <h2>Project Folder Structure</h2>
+                    <div class="structure-container">
+                        kmer-room-php/<br>
+                        ├── <span class="folder">admin/</span><br>
+                        │   ├── <span class="file">dashboard.php</span><br>
+                        │   ├── <span class="file">listings.php</span><br>
+                        │   ├── <span class="file">users.php</span><br>
+                        │   ├── <span class="file">verification.php</span><br>
+                        │   └── <span class="file">reports.php</span><br>
+                        ├── <span class="folder">includes/</span><br>
+                        │   ├── <span class="file">config.php</span><br>
+                        │   ├── <span class="file">database.php</span><br>
+                        │   ├── <span class="file">auth.php</span><br>
+                        │   ├── <span class="file">functions.php</span><br>
+                        │   └── <span class="file">header.php</span><br>
+                        ├── <span class="folder">assets/</span><br>
+                        │   ├── <span class="folder">css/</span><br>
+                        │   │   ├── <span class="file">style.css</span><br>
+                        │   │   ├── <span class="file">responsive.css</span><br>
+                        │   │   └── <span class="file">custom-bootstrap.css</span><br>
+                        │   ├── <span class="folder">js/</span><br>
+                        │   │   ├── <span class="file">main.js</span><br>
+                        │   │   ├── <span class="file">search.js</span><br>
+                        │   │   └── <span class="file">validation.js</span><br>
+                        │   ├── <span class="folder">images/</span><br>
+                        │   │   ├── <span class="folder">icons/</span><br>
+                        │   │   ├── <span class="folder">rooms/</span><br>
+                        │   │   └── <span class="folder">users/</span><br>
+                        │   └── <span class="folder">uploads/</span><br>
+                        │       ├── <span class="folder">contracts/</span><br>
+                        │       └── <span class="folder">room_images/</span><br>
+                        ├── <span class="folder">classes/</span><br>
+                        │   ├── <span class="file">User.php</span><br>
+                        │   ├── <span class="file">Listing.php</span><br>
+                        │   ├── <span class="file">Booking.php</span><br>
+                        │   ├── <span class="file">Payment.php</span><br>
+                        │   └── <span class="file">Review.php</span><br>
+                        ├── <span class="folder">pages/</span><br>
+                        │   ├── <span class="file">index.php</span><br>
+                        │   ├── <span class="file">search.php</span><br>
+                        │   ├── <span class="file">listing-detail.php</span><br>
+                        │   ├── <span class="file">dashboard.php</span><br>
+                        │   ├── <span class="file">login.php</span><br>
+                        │   ├── <span class="file">register.php</span><br>
+                        │   ├── <span class="file">booking.php</span><br>
+                        │   └── <span class="file">profile.php</span><br>
+                        ├── <span class="folder">api/</span><br>
+                        │   ├── <span class="file">payment-mtn.php</span><br>
+                        │   ├── <span class="file">payment-orange.php</span><br>
+                        │   ├── <span class="file">sms-api.php</span><br>
+                        │   └── <span class="file">search-api.php</span><br>
+                        ├── <span class="folder">templates/</span><br>
+                        │   ├── <span class="file">header.php</span><br>
+                        │   ├── <span class="file">footer.php</span><br>
+                        │   ├── <span class="file">navigation.php</span><br>
+                        │   └── <span class="file">modals.php</span><br>
+                        ├── <span class="folder">vendor/</span> (Composer dependencies)<br>
+                        ├── <span class="file">.htaccess</span><br>
+                        ├── <span class="file">composer.json</span><br>
+                        ├── <span class="file">index.php</span> (Main entry point)<br>
+                        └── <span class="file">config.sample.php</span> (Rename to config.php)
+                    </div>
+                </div>
+                
+                <h2>Implementation Phases</h2>
+                
+                <div class="card phase-card">
+                    <div class="card-body">
+                        <h4 class="card-title"><span class="badge badge-phase">Phase 1</span> Core Setup & Authentication</h4>
+                        <p class="card-text">Setup database structure, user authentication, and basic admin functionality.</p>
+                        <ul>
+                            <li>Database design and implementation</li>
+                            <li>User registration and login system</li>
+                            <li>Admin dashboard skeleton</li>
+                            <li>Basic profile management</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="card phase-card">
+                    <div class="card-body">
+                        <h4 class="card-title"><span class="badge badge-phase">Phase 2</span> Listing Management</h4>
+                        <p class="card-text">Develop property listing functionality for landlords and search for tenants.</p>
+                        <ul>
+                            <li>Listing creation and management</li>
+                            <li>Advanced search with filters</li>
+                            <li>Image upload and management</li>
+                            <li>Listing verification system</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="card phase-card">
+                    <div class="card-body">
+                        <h4 class="card-title"><span class="badge badge-phase">Phase 3</span> Booking & Payments</h4>
+                        <p class="card-text">Implement booking system and payment integration with local providers.</p>
+                        <ul>
+                            <li>Visit booking system</li>
+                            <li>MTN Mobile Money integration</li>
+                            <li>Orange Money integration</li>
+                            <li>Booking confirmation流程</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="card phase-card">
+                    <div class="card-body">
+                        <h4 class="card-title"><span class="badge badge-phase">Phase 4</span> Reviews & Communication</h4>
+                        <p class="card-text">Add review system, messaging, and notification features.</p>
+                        <ul>
+                            <li>Rating and review system</li>
+                            <li>Direct messaging between users</li>
+                            <li>Email and SMS notifications</li>
+                            <li>Digital contract signing</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-4">
+                <div class="tech-stack">
+                    <h2>Technology Stack</h2>
+                    
+                    <div class="tech-item">
+                        <h5>Frontend</h5>
+                        <ul>
+                            <li>HTML5, CSS3, JavaScript</li>
+                            <li>Bootstrap 5</li>
+                            <li>jQuery (for Bootstrap components)</li>
+                            <li>Font Awesome icons</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="tech-item">
+                        <h5>Backend</h5>
+                        <ul>
+                            <li>PHP 7.4+</li>
+                            <li>MySQL/MariaDB</li>
+                            <li>Apache Web Server</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="tech-item">
+                        <h5>Payment Integration</h5>
+                        <ul>
+                            <li>MTN Mobile Money API</li>
+                            <li>Orange Money API</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="tech-item">
+                        <h5>Security</h5>
+                        <ul>
+                            <li>Password hashing (bcrypt)</li>
+                            <li>SQL injection prevention</li>
+                            <li>XSS protection</li>
+                            <li>CSRF tokens</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="tech-item">
+                        <h5>Additional Features</h5>
+                        <ul>
+                            <li>Responsive design</li>
+                            <li>Multi-language support (FR/EN)</li>
+                            <li>Image optimization</li>
+                            <li>SMS integration</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="tech-stack mt-4">
+                    <h2>Database Tables</h2>
+                    
+                    <div class="tech-item">
+                        <h5>Users</h5>
+                        <p>user_id, name, email, password, phone, role, verified, created_at</p>
+                    </div>
+                    
+                    <div class="tech-item">
+                        <h5>Listings</h5>
+                        <p>listing_id, landlord_id, title, description, price, location, amenities, status, created_at</p>
+                    </div>
+                    
+                    <div class="tech-item">
+                        <h5>Bookings</h5>
+                        <p>booking_id, tenant_id, listing_id, visit_date, status, payment_status, created_at</p>
+                    </div>
+                    
+                    <div class="tech-item">
+                        <h5>Payments</h5>
+                        <p>payment_id, booking_id, amount, method, transaction_id, status, created_at</p>
+                    </div>
+                    
+                    <div class="tech-item">
+                        <h5>Reviews</h5>
+                        <p>review_id, listing_id, user_id, rating, comment, created_at</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
