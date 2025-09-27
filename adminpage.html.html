@@ -1,0 +1,1742 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - KMER ROOM</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-green: #2ecc71;
+            --dark-green: #27ae60;
+            --accent-yellow: #f1c40f;
+            --light-yellow: #f9e79f;
+            --light-color: #f8f9fa;
+            --dark-color: #212529;
+            --sidebar-width: 250px;
+            --bg-color: #f5f7f9;
+            --text-color: #333;
+            --card-bg: white;
+            --header-bg: white;
+            --border-color: #eee;
+        }
+        
+        .dark-mode {
+            --bg-color: #1a1a1a;
+            --text-color: #f0f0f0;
+            --card-bg: #2d2d2d;
+            --header-bg: #242424;
+            --border-color: #444;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            overflow-x: hidden;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        
+        /* Login Page */
+        .login-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            padding: 20px;
+        }
+        
+        .login-card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            width: 100%;
+            max-width: 450px;
+            padding: 2rem;
+            position: relative;
+        }
+        
+        .demo-credentials {
+            background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .demo-credentials h4 {
+            font-size: 16px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .demo-credentials h4 i {
+            margin-right: 8px;
+        }
+        
+        .demo-credentials ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+        
+        .demo-credentials li {
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+        
+        .login-logo {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .login-logo img {
+            height: 60px;
+        }
+        
+        /* Admin Layout */
+        .admin-container {
+            display: flex;
+            min-height: 100vh;
+        }
+        
+        /* Sidebar */
+        .admin-sidebar {
+            width: var(--sidebar-width);
+            background: var(--dark-color);
+            color: white;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+        
+        .sidebar-header {
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+        
+        .sidebar-header h3 {
+            color: white;
+            margin: 0;
+            font-size: 1.3rem;
+        }
+        
+        .sidebar-menu {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .sidebar-menu li {
+            margin: 0;
+        }
+        
+        .sidebar-menu a {
+            display: flex;
+            align-items: center;
+            padding: 15px 20px;
+            color: #ddd;
+            text-decoration: none;
+            transition: all 0.3s;
+            border-left: 4px solid transparent;
+        }
+        
+        .sidebar-menu a:hover, .sidebar-menu a.active {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border-left: 4px solid var(--primary-green);
+        }
+        
+        .sidebar-menu i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+        }
+        
+        .menu-divider {
+            height: 1px;
+            background: rgba(255, 255, 255, 0.1);
+            margin: 10px 0;
+        }
+        
+        /* Main Content */
+        .admin-main {
+            flex: 1;
+            margin-left: var(--sidebar-width);
+            transition: all 0.3s;
+        }
+        
+        .admin-header {
+            background: var(--header-bg);
+            padding: 15px 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background-color 0.3s;
+        }
+        
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .admin-content {
+            padding: 20px;
+        }
+        
+        /* Dashboard Cards */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .stat-card {
+            background: var(--card-bg);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            display: flex;
+            align-items: center;
+            transition: transform 0.3s, background-color 0.3s;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .stat-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin-right: 15px;
+        }
+        
+        .stat-details h3 {
+            font-size: 24px;
+            margin: 0;
+        }
+        
+        .stat-details p {
+            color: #6c757d;
+            margin: 0;
+        }
+        
+        /* Data Tables */
+        .data-card {
+            background: var(--card-bg);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 20px;
+            transition: background-color 0.3s;
+        }
+        
+        .data-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .data-card h3 {
+            margin: 0;
+            font-size: 18px;
+        }
+        
+        .admin-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .admin-table th, .admin-table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+            transition: border-color 0.3s;
+        }
+        
+        .admin-table th {
+            background: #f8f9fa;
+            font-weight: 600;
+        }
+        
+        .dark-mode .admin-table th {
+            background: #3d3d3d;
+        }
+        
+        .admin-table tr:hover {
+            background: #f8f9fa;
+        }
+        
+        .dark-mode .admin-table tr:hover {
+            background: #3d3d3d;
+        }
+        
+        .status-badge {
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        
+        .status-active {
+            background: #e8f5e9;
+            color: #2ecc71;
+        }
+        
+        .status-pending {
+            background: #fff8e1;
+            color: #f1c40f;
+        }
+        
+        .status-inactive {
+            background: #ffebee;
+            color: #e74c3c;
+        }
+        
+        .btn-admin {
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 13px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .btn-admin:hover {
+            opacity: 0.9;
+            transform: scale(1.05);
+        }
+        
+        .btn-edit {
+            background: #e3f2fd;
+            color: #1976d2;
+        }
+        
+        .btn-delete {
+            background: #ffebee;
+            color: #e74c3c;
+        }
+        
+        .btn-view {
+            background: #e8f5e9;
+            color: #2ecc71;
+        }
+        
+        .btn-chat {
+            background: #f3e5f5;
+            color: #9c27b0;
+        }
+        
+        /* Toggle Switch */
+        .theme-switch-wrapper {
+            display: flex;
+            align-items: center;
+            margin-right: 15px;
+        }
+        
+        .theme-switch {
+            display: inline-block;
+            height: 24px;
+            position: relative;
+            width: 50px;
+        }
+        
+        .theme-switch input {
+            display: none;
+        }
+        
+        .slider {
+            background-color: #ccc;
+            bottom: 0;
+            cursor: pointer;
+            left: 0;
+            position: absolute;
+            right: 0;
+            top: 0;
+            transition: .4s;
+        }
+        
+        .slider:before {
+            background-color: white;
+            bottom: 3px;
+            content: "";
+            height: 18px;
+            left: 3px;
+            position: absolute;
+            transition: .4s;
+            width: 18px;
+        }
+        
+        input:checked + .slider {
+            background-color: var(--primary-green);
+        }
+        
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+        
+        .slider.round {
+            border-radius: 34px;
+        }
+        
+        .slider.round:before {
+            border-radius: 50%;
+        }
+        
+        /* Chat Modal */
+        .chat-container {
+            height: 300px;
+            overflow-y: auto;
+            padding: 10px;
+            background: #f9f9f9;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+        
+        .dark-mode .chat-container {
+            background: #3d3d3d;
+        }
+        
+        .message {
+            padding: 8px 12px;
+            border-radius: 18px;
+            margin-bottom: 10px;
+            max-width: 80%;
+            word-wrap: break-word;
+        }
+        
+        .message.admin {
+            background: #e3f2fd;
+            margin-left: auto;
+            border-bottom-right-radius: 4px;
+        }
+        
+        .dark-mode .message.admin {
+            background: #2d3d6d;
+            color: white;
+        }
+        
+        .message.user {
+            background: #f1f0f0;
+            margin-right: auto;
+            border-bottom-left-radius: 4px;
+        }
+        
+        .dark-mode .message.user {
+            background: #4d4d4d;
+            color: white;
+        }
+        
+        /* Settings Form */
+        .settings-form .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .settings-form label {
+            font-weight: 500;
+            margin-bottom: 8px;
+            display: block;
+        }
+        
+        /* Security Settings */
+        .security-settings .security-item {
+            padding: 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            .admin-sidebar {
+                width: 70px;
+                text-align: center;
+            }
+            
+            .sidebar-header h3, .sidebar-menu span {
+                display: none;
+            }
+            
+            .sidebar-menu i {
+                margin-right: 0;
+                font-size: 20px;
+            }
+            
+            .admin-main {
+                margin-left: 70px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .admin-sidebar {
+                width: 0;
+                overflow: hidden;
+            }
+            
+            .admin-main {
+                margin-left: 0;
+            }
+            
+            .sidebar-open .admin-sidebar {
+                width: var(--sidebar-width);
+            }
+            
+            .sidebar-open .sidebar-header h3, .sidebar-open .sidebar-menu span {
+                display: block;
+            }
+            
+            .sidebar-open .sidebar-menu i {
+                margin-right: 10px;
+            }
+            
+            .sidebar-open .admin-main {
+                margin-left: var(--sidebar-width);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Admin Dashboard -->
+    <div class="admin-container" id="adminDashboard">
+        <!-- Sidebar -->
+        <div class="admin-sidebar">
+            <div class="sidebar-header">
+                <h3>KMER ROOM Admin</h3>
+            </div>
+            <ul class="sidebar-menu">
+                <li><a href="#" class="active" data-section="dashboard"><i class="fas fa-tachometer-alt"></i> <span>Dashboard</span></a></li>
+                <li><a href="#" data-section="users"><i class="fas fa-users"></i> <span>User Management</span></a></li>
+                <li><a href="#" data-section="properties"><i class="fas fa-home"></i> <span>Property Management</span></a></li>
+                <li><a href="#" data-section="applications"><i class="fas fa-file-alt"></i> <span>Applications</span></a></li>
+                <li><a href="#" data-section="payments"><i class="fas fa-money-bill-wave"></i> <span>Payments</span></a></li>
+                <div class="menu-divider"></div>
+                <li><a href="#" data-section="analytics"><i class="fas fa-chart-bar"></i> <span>Analytics</span></a></li>
+                <li><a href="#" data-section="settings"><i class="fas fa-cog"></i> <span>Settings</span></a></li>
+                <li><a href="#" data-section="security"><i class="fas fa-shield-alt"></i> <span>Security</span></a></li>
+                <div class="menu-divider"></div>
+                <li><a href="#" onclick="handleLogout()" id="sidebarLogoutBtn"><i class="fas fa-sign-out-alt"></i> <span>Logout</span></a></li>
+            </ul>
+        </div>
+
+        <!-- Main Content -->
+        <div class="admin-main">
+            <div class="admin-header">
+                <div>
+                    <button class="btn btn-sm btn-outline-secondary d-md-none" id="sidebarToggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <h2 id="pageTitle">Dashboard</h2>
+                </div>
+                <div class="header-actions">
+                    <div class="theme-switch-wrapper">
+                        <label class="theme-switch" for="theme-toggle">
+                            <input type="checkbox" id="theme-toggle">
+                            <span class="slider round"></span>
+                        </label>
+                        <span id="theme-label" class="ms-2">Dark Mode</span>
+                    </div>
+                    <div class="dropdown">
+                        <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" id="notificationsDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-bell"></i>
+                            <span class="badge bg-danger" id="notificationCount">3</span>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="notificationsDropdown" id="notificationList">
+                            <li><a class="dropdown-item" href="#">New user registration</a></li>
+                            <li><a class="dropdown-item" href="#">Payment received</a></li>
+                            <li><a class="dropdown-item" href="#">New property listing</a></li>
+                        </ul>
+                    </div>
+                    <div class="dropdown">
+                        <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-user-circle"></i> Admin User
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                            <li><a class="dropdown-item" href="#" id="openProfileModal"><i class="fas fa-user me-2"></i> Profile</a></li>
+
+                            <li><a class="dropdown-item" href="#"><i class="fas fa-cog me-2"></i> Settings</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#" id="dropdownLogoutBtn"><i class="fas fa-sign-out-alt me-2"></i> Logout</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="admin-content" id="adminContent">
+        <!-- Admin Profile Modal (moved outside dropdown for correct display) -->
+        <div class="modal fade" id="profileModal" tabindex="-1" aria-labelledby="profileModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="profileModalLabel">Edit Profile</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="profileForm">
+                            <div class="mb-3 text-center">
+                                <img id="adminAvatarPreview" src="https://ui-avatars.com/api/?name=Admin+User&background=2ecc71&color=fff&size=100" class="rounded-circle mb-2" style="width:100px;height:100px;object-fit:cover;" alt="Profile Picture">
+                                <input type="file" class="form-control mt-2" id="adminAvatar" accept="image/*">
+                            </div>
+                            <div class="mb-3">
+                                <label for="adminName" class="form-label">Name</label>
+                                <input type="text" class="form-control" id="adminName" value="Admin User" required>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-success" id="saveProfileBtn">Save Changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+                <!-- Dashboard Content -->
+                <div class="content-section" id="dashboardSection">
+                    <!-- Stats Overview -->
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-icon" style="background: #e8f5e9; color: var(--primary-green);">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div class="stat-details">
+                                <h3 id="totalUsers">1,248</h3>
+                                <p>Total Users</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon" style="background: #e3f2fd; color: #3498db;">
+                                <i class="fas fa-home"></i>
+                            </div>
+                            <div class="stat-details">
+                                <h3 id="totalProperties">586</h3>
+                                <p>Properties Listed</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon" style="background: #fff8e1; color: var(--accent-yellow);">
+                                <i class="fas fa-file-alt"></i>
+                            </div>
+                            <div class="stat-details">
+                                <h3 id="pendingApplications">327</h3>
+                                <p>Pending Applications</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon" style="background: #e8faf0; color: var(--dark-green);">
+                                <i class="fas fa-money-bill-wave"></i>
+                            </div>
+                            <div class="stat-details">
+                                <h3 id="totalRevenue">$42,380</h3>
+                                <p>Total Revenue</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Recent Activities -->
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="data-card">
+                                <div class="data-card-header">
+                                    <h3>Recent Activities</h3>
+                                    <a href="#" class="btn btn-sm btn-outline-primary">View All</a>
+                                </div>
+                                <div class="table-responsive">
+                                    <table class="admin-table">
+                                        <thead>
+                                            <tr>
+                                                <th>User</th>
+                                                <th>Activity</th>
+                                                <th>Date</th>
+                                                <th>Status</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="activitiesTable">
+                                            <tr>
+                                                <td>John Doe</td>
+                                                <td>Property Listing</td>
+                                                <td>Oct 15, 2023</td>
+                                                <td><span class="status-badge status-active">Active</span></td>
+                                                <td>
+                                                    <button class="btn-admin btn-view"><i class="fas fa-eye"></i></button>
+                                                    <button class="btn-admin btn-edit"><i class="fas fa-edit"></i></button>
+                                                    <button class="btn-admin btn-chat" data-bs-toggle="modal" data-bs-target="#chatModal" data-user="John Doe"><i class="fas fa-comment"></i></button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Sarah Johnson</td>
+                                                <td>Rental Application</td>
+                                                <td>Oct 14, 2023</td>
+                                                <td><span class="status-badge status-pending">Pending</span></td>
+                                                <td>
+                                                    <button class="btn-admin btn-view"><i class="fas fa-eye"></i></button>
+                                                    <button class="btn-admin btn-edit"><i class="fas fa-edit"></i></button>
+                                                    <button class="btn-admin btn-chat" data-bs-toggle="modal" data-bs-target="#chatModal" data-user="Sarah Johnson"><i class="fas fa-comment"></i></button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Michael Brown</td>
+                                                <td>Payment Received</td>
+                                                <td>Oct 14, 2023</td>
+                                                <td><span class="status-badge status-active">Completed</span></td>
+                                                <td>
+                                                    <button class="btn-admin btn-view"><i class="fas fa-eye"></i></button>
+                                                    <button class="btn-admin btn-edit"><i class="fas fa-edit"></i></button>
+                                                    <button class="btn-admin btn-chat" data-bs-toggle="modal" data-bs-target="#chatModal" data-user="Michael Brown"><i class="fas fa-comment"></i></button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-4">
+                            <div class="data-card">
+                                <div class="data-card-header">
+                                    <h3>Quick Actions</h3>
+                                </div>
+                                <div class="d-grid gap-2">
+                                    <button class="btn btn-success mb-2" data-bs-toggle="modal" data-bs-target="#addUserModal"><i class="fas fa-plus me-2"></i> Add New User</button>
+                                    <button class="btn btn-primary mb-2" data-bs-toggle="modal" data-bs-target="#addPropertyModal"><i class="fas fa-home me-2"></i> Add Property</button>
+                                    <button class="btn btn-info mb-2" id="generateReportBtn"><i class="fas fa-file-alt me-2"></i> Generate Report</button>
+                                    <button class="btn btn-warning mb-2" id="refreshDataBtn"><i class="fas fa-sync-alt me-2"></i> Refresh Data</button>
+                                </div>
+                            </div>
+                            
+                            <div class="data-card mt-4">
+                                <div class="data-card-header">
+                                    <h3>System Status</h3>
+                                </div>
+                                <div class="mb-3">
+                                    <div class="d-flex justify-content-between">
+                                        <span>Server Uptime</span>
+                                        <span class="text-success">99.9%</span>
+                                    </div>
+                                    <div class="progress mt-1" style="height: 8px;">
+                                        <div class="progress-bar bg-success" role="progressbar" style="width: 99.9%;"></div>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <div class="d-flex justify-content-between">
+                                        <span>Storage Usage</span>
+                                        <span class="text-warning">65%</span>
+                                    </div>
+                                    <div class="progress mt-1" style="height: 8px;">
+                                        <div class="progress-bar bg-warning" role="progressbar" style="width: 65%;"></div>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <div class="d-flex justify-content-between">
+                                        <span>API Requests</span>
+                                        <span class="text-primary" id="apiRequests">1,243/min</span>
+                                    </div>
+                                    <div class="progress mt-1" style="height: 8px;">
+                                        <div class="progress-bar bg-primary" role="progressbar" style="width: 75%;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Users Section -->
+                <div class="content-section" id="usersSection" style="display: none;">
+                    <div class="data-card">
+                        <div class="data-card-header">
+                            <h3>User Management</h3>
+                            <button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#addUserModal">
+                                <i class="fas fa-plus me-1"></i> Add User
+                            </button>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="admin-table">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Role</th>
+                                        <th>Status</th>
+                                        <th>Joined</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="usersTable">
+                                    <tr>
+                                        <td>John Doe</td>
+                                        <td>john@example.com</td>
+                                        <td>Tenant</td>
+                                        <td><span class="status-badge status-active">Active</span></td>
+                                        <td>Oct 10, 2023</td>
+                                        <td>
+                                            <button class="btn-admin btn-view"><i class="fas fa-eye"></i></button>
+                                            <button class="btn-admin btn-edit"><i class="fas fa-edit"></i></button>
+                                            <button class="btn-admin btn-chat" data-bs-toggle="modal" data-bs-target="#chatModal" data-user="John Doe"><i class="fas fa-comment"></i></button>
+                                            <button class="btn-admin btn-delete"><i class="fas fa-trash"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Sarah Johnson</td>
+                                        <td>sarah@example.com</td>
+                                        <td>Landlord</td>
+                                        <td><span class="status-badge status-active">Active</span></td>
+                                        <td>Oct 5, 2023</td>
+                                        <td>
+                                            <button class="btn-admin btn-view"><i class="fas fa-eye"></i></button>
+                                            <button class="btn-admin btn-edit"><i class="fas fa-edit"></i></button>
+                                            <button class="btn-admin btn-chat" data-bs-toggle="modal" data-bs-target="#chatModal" data-user="Sarah Johnson"><i class="fas fa-comment"></i></button>
+                                            <button class="btn-admin btn-delete"><i class="fas fa-trash"></i></button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Properties Section -->
+                <div class="content-section" id="propertiesSection" style="display: none;">
+                    <div class="data-card">
+                        <div class="data-card-header">
+                            <h3>Property Management</h3>
+                            <button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#addPropertyModal">
+                                <i class="fas fa-plus me-1"></i> Add Property
+                            </button>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="admin-table">
+                                <thead>
+                                    <tr>
+                                        <th>Property</th>
+                                        <th>Address</th>
+                                        <th>Type</th>
+                                        <th>Price</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="propertiesTable">
+                                    <tr>
+                                        <td>Luxury Apartment</td>
+                                        <td>123 Main St</td>
+                                        <td>Apartment</td>
+                                        <td>$1,200/mo</td>
+                                        <td><span class="status-badge status-active">Available</span></td>
+                                        <td>
+                                            <button class="btn-admin btn-view"><i class="fas fa-eye"></i></button>
+                                            <button class="btn-admin btn-edit"><i class="fas fa-edit"></i></button>
+                                            <button class="btn-admin btn-delete"><i class="fas fa-trash"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Family House</td>
+                                        <td>456 Oak Ave</td>
+                                        <td>House</td>
+                                        <td>$2,100/mo</td>
+                                        <td><span class="status-badge status-pending">Pending</span></td>
+                                        <td>
+                                            <button class="btn-admin btn-view"><i class="fas fa-eye"></i></button>
+                                            <button class="btn-admin btn-edit"><i class="fas fa-edit"></i></button>
+                                            <button class="btn-admin btn-delete"><i class="fas fa-trash"></i></button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Payments Section -->
+                <div class="content-section" id="paymentsSection" style="display: none;">
+                    <div class="data-card">
+                        <div class="data-card-header">
+                            <h3>Payment Management</h3>
+                            <div>
+                                <button class="btn btn-success btn-sm me-2">
+                                    <i class="fas fa-download me-1"></i> Export
+                                </button>
+                                <button class="btn btn-primary btn-sm">
+                                    <i class="fas fa-filter me-1"></i> Filter
+                                </button>
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="admin-table">
+                                <thead>
+                                    <tr>
+                                        <th>Transaction ID</th>
+                                        <th>User</th>
+                                        <th>Amount</th>
+                                        <th>Type</th>
+                                        <th>Date</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="paymentsTable">
+                                    <tr>
+                                        <td>TXN-78945</td>
+                                        <td>Michael Brown</td>
+                                        <td>$1,200.00</td>
+                                        <td>Rent</td>
+                                        <td>Oct 15, 2023</td>
+                                        <td><span class="status-badge status-active">Completed</span></td>
+                                        <td>
+                                            <button class="btn-admin btn-view"><i class="fas fa-eye"></i></button>
+                                            <button class="btn-admin btn-edit"><i class="fas fa-edit"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>TXN-78946</td>
+                                        <td>Emily Wilson</td>
+                                        <td>$500.00</td>
+                                        <td>Security Deposit</td>
+                                        <td>Oct 14, 2023</td>
+                                        <td><span class="status-badge status-pending">Processing</span></td>
+                                        <td>
+                                            <button class="btn-admin btn-view"><i class="fas fa-eye"></i></button>
+                                            <button class="btn-admin btn-edit"><i class="fas fa-edit"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>TXN-78947</td>
+                                        <td>Robert Davis</td>
+                                        <td>$75.00</td>
+                                        <td>Application Fee</td>
+                                        <td>Oct 13, 2023</td>
+                                        <td><span class="status-badge status-active">Completed</span></td>
+                                        <td>
+                                            <button class="btn-admin btn-view"><i class="fas fa-eye"></i></button>
+                                            <button class="btn-admin btn-edit"><i class="fas fa-edit"></i></button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Settings Section -->
+                <div class="content-section" id="settingsSection" style="display: none;">
+                    <div class="data-card">
+                        <div class="data-card-header">
+                            <h3>Platform Settings</h3>
+                        </div>
+                        <div class="settings-form">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h4 class="mb-4">General Settings</h4>
+                                    
+                                    <div class="form-group">
+                                        <label for="siteName">Site Name</label>
+                                        <input type="text" class="form-control" id="siteName" value="KMER ROOM">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="adminEmail">Admin Email</label>
+                                        <input type="email" class="form-control" id="adminEmail" value="admin@kmerroom.com">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="timezone">Timezone</label>
+                                        <select class="form-select" id="timezone">
+                                            <option selected>(UTC-05:00) Eastern Time</option>
+                                            <option>(UTC-06:00) Central Time</option>
+                                            <option>(UTC-07:00) Mountain Time</option>
+                                            <option>(UTC-08:00) Pacific Time</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="dateFormat">Date Format</label>
+                                        <select class="form-select" id="dateFormat">
+                                            <option selected>MM/DD/YYYY</option>
+                                            <option>DD/MM/YYYY</option>
+                                            <option>YYYY-MM-DD</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-6">
+                                    <h4 class="mb-4">Application Settings</h4>
+                                    
+                                    <div class="form-group">
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" id="userRegistration" checked>
+                                            <label class="form-check-label" for="userRegistration">Allow new user registration</label>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" id="emailVerification" checked>
+                                            <label class="form-check-label" for="emailVerification">Require email verification</label>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" id="autoApprove" checked>
+                                            <label class="form-check-label" for="autoApprove">Auto-approve listings</label>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" id="notificationsEnabled" checked>
+                                            <label class="form-check-label" for="notificationsEnabled">Enable email notifications</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="d-flex justify-content-end mt-4">
+                                <button class="btn btn-secondary me-2">Cancel</button>
+                                <button class="btn btn-success" id="saveSettings">Save Settings</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Security Section -->
+                <div class="content-section" id="securitySection" style="display: none;">
+                    <div class="data-card">
+                        <div class="data-card-header">
+                            <h3>Security Settings</h3>
+                        </div>
+                        <div class="security-settings">
+                            <div class="security-item">
+                                <div>
+                                    <h5>Two-Factor Authentication</h5>
+                                    <p class="mb-0">Add an extra layer of security to your account</p>
+                                </div>
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" id="twoFactor" checked>
+                                    <label class="form-check-label" for="twoFactor">Enabled</label>
+                                </div>
+                            </div>
+                            
+                            <div class="security-item">
+                                <div>
+                                    <h5>Session Timeout</h5>
+                                    <p class="mb-0">Automatically log out after period of inactivity</p>
+                                </div>
+                                <div>
+                                    <select class="form-select" id="sessionTimeout">
+                                        <option>15 minutes</option>
+                                        <option>30 minutes</option>
+                                        <option selected>1 hour</option>
+                                        <option>2 hours</option>
+                                        <option>4 hours</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="security-item">
+                                <div>
+                                    <h5>Password Policy</h5>
+                                    <p class="mb-0">Require strong passwords for all users</p>
+                                </div>
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" id="strongPasswords" checked>
+                                    <label class="form-check-label" for="strongPasswords">Enabled</label>
+                                </div>
+                            </div>
+                            
+                            <div class="security-item">
+                                <div>
+                                    <h5>Login Attempts</h5>
+                                    <p class="mb-0">Lock account after failed login attempts</p>
+                                </div>
+                                <div>
+                                    <select class="form-select" id="loginAttempts">
+                                        <option>3 attempts</option>
+                                        <option selected>5 attempts</option>
+                                        <option>10 attempts</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="security-item">
+                                <div>
+                                    <h5>IP Whitelisting</h5>
+                                    <p class="mb-0">Restrict admin access to specific IP addresses</p>
+                                </div>
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" id="ipWhitelist">
+                                    <label class="form-check-label" for="ipWhitelist">Enabled</label>
+                                </div>
+                            </div>
+                            
+                            <div class="d-flex justify-content-end mt-4">
+                                <button class="btn btn-secondary me-2">Cancel</button>
+                                <button class="btn btn-success" id="saveSecurity">Save Security Settings</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add User Modal -->
+    <div class="modal fade" id="addUserModal" tabindex="-1" aria-labelledby="addUserModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addUserModalLabel">Add New User</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="addUserForm">
+                        <div class="mb-3">
+                            <label for="userName" class="form-label">Full Name</label>
+                            <input type="text" class="form-control" id="userName" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="userEmail" class="form-label">Email Address</label>
+                            <input type="email" class="form-control" id="userEmail" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="userRole" class="form-label">Role</label>
+                            <select class="form-select" id="userRole" required>
+                                <option value="">Select Role</option>
+                                <option value="tenant">Tenant</option>
+                                <option value="landlord">Landlord</option>
+                                <option value="admin">Administrator</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="userStatus" class="form-label">Status</label>
+                            <select class="form-select" id="userStatus" required>
+                                <option value="active">Active</option>
+                                <option value="inactive">Inactive</option>
+                                <option value="pending">Pending</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-success" id="saveUserBtn">Save User</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Property Modal -->
+    <div class="modal fade" id="addPropertyModal" tabindex="-1" aria-labelledby="addPropertyModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addPropertyModalLabel">Add New Property</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="addPropertyForm">
+                        <div class="mb-3">
+                            <label for="propertyTitle" class="form-label">Property Title</label>
+                            <input type="text" class="form-control" id="propertyTitle" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="propertyImages" class="form-label">Property Images</label>
+                            <input type="file" class="form-control" id="propertyImages" accept="image/*" multiple required>
+                            <div id="propertyImagePreview" class="mt-2 d-flex flex-wrap gap-2"></div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="propertyAddress" class="form-label">Address</label>
+                            <input type="text" class="form-control" id="propertyAddress" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="propertyType" class="form-label">Type</label>
+                            <select class="form-select" id="propertyType" required>
+                                <option value="">Select Type</option>
+                                <option value="apartment">Apartment</option>
+                                <option value="house">House</option>
+                                <option value="condo">Condo</option>
+                                <option value="studio">Studio</option>
+                            </select>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="propertyPrice" class="form-label">Price ($/mo)</label>
+                                    <input type="number" class="form-control" id="propertyPrice" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="propertyStatus" class="form-label">Status</label>
+                                    <select class="form-select" id="propertyStatus" required>
+                                        <option value="available">Available</option>
+                                        <option value="occupied">Occupied</option>
+                                        <option value="pending">Pending</option>
+                                        <option value="maintenance">Maintenance</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-success" id="savePropertyBtn">Save Property</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Chat Modal -->
+    <div class="modal fade" id="chatModal" tabindex="-1" aria-labelledby="chatModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="chatModalLabel">Chat with <span id="chatUserName"></span></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="chat-container" id="chatMessages">
+                        <div class="message user">
+                            Hello, I have a question about my application.
+                        </div>
+                        <div class="message admin">
+                            Hi there! I'd be happy to help. What would you like to know?
+                        </div>
+                        <div class="message user">
+                            When can I expect to hear back about my rental application?
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Type your message..." id="chatInput">
+                        <button class="btn btn-success" type="button" id="sendMessageBtn">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script>
+        // Open profile modal
+        document.getElementById('openProfileModal').addEventListener('click', function(e) {
+            e.preventDefault();
+            const modal = new bootstrap.Modal(document.getElementById('profileModal'));
+            modal.show();
+        });
+
+        // Preview avatar image
+        document.getElementById('adminAvatar').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(ev) {
+                    document.getElementById('adminAvatarPreview').src = ev.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // Save profile changes
+        document.getElementById('saveProfileBtn').addEventListener('click', function() {
+            const newName = document.getElementById('adminName').value.trim();
+            if (newName) {
+                // Update name in dropdown
+                document.querySelector('#userDropdown').innerHTML = '<i class="fas fa-user-circle"></i> ' + newName;
+                // Optionally update avatar everywhere if used in more places
+                bootstrap.Modal.getInstance(document.getElementById('profileModal')).hide();
+            }
+        });
+        </script>
+    <script>
+        // Demo credentials
+        const DEMO_EMAIL = 'admin@kmerroom.com';
+        const DEMO_PASSWORD = 'admin123';
+
+        // DOM Elements
+        const loginPage = document.getElementById('loginPage');
+        const adminDashboard = document.getElementById('adminDashboard');
+        const loginForm = document.getElementById('loginForm');
+        const loginError = document.getElementById('loginError');
+        const logoutBtn = document.getElementById('logoutBtn');
+        const sidebarToggle = document.getElementById('sidebarToggle');
+        const pageTitle = document.getElementById('pageTitle');
+        const adminContent = document.getElementById('adminContent');
+        const notificationCount = document.getElementById('notificationCount');
+        const notificationList = document.getElementById('notificationList');
+        const refreshDataBtn = document.getElementById('refreshDataBtn');
+        const generateReportBtn = document.getElementById('generateReportBtn');
+        const saveUserBtn = document.getElementById('saveUserBtn');
+        const savePropertyBtn = document.getElementById('savePropertyBtn');
+        const apiRequests = document.getElementById('apiRequests');
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeLabel = document.getElementById('theme-label');
+        const saveSettings = document.getElementById('saveSettings');
+        const saveSecurity = document.getElementById('saveSecurity');
+        const chatModal = document.getElementById('chatModal');
+        const chatUserName = document.getElementById('chatUserName');
+        const chatMessages = document.getElementById('chatMessages');
+        const chatInput = document.getElementById('chatInput');
+        const sendMessageBtn = document.getElementById('sendMessageBtn');
+
+        // Data counters
+        const totalUsers = document.getElementById('totalUsers');
+        const totalProperties = document.getElementById('totalProperties');
+        const pendingApplications = document.getElementById('pendingApplications');
+        const totalRevenue = document.getElementById('totalRevenue');
+
+        // Section elements
+        const contentSections = document.querySelectorAll('.content-section');
+        const dashboardSection = document.getElementById('dashboardSection');
+        const usersSection = document.getElementById('usersSection');
+        const propertiesSection = document.getElementById('propertiesSection');
+        const paymentsSection = document.getElementById('paymentsSection');
+        const settingsSection = document.getElementById('settingsSection');
+        const securitySection = document.getElementById('securitySection');
+        const usersTable = document.getElementById('usersTable');
+        const propertiesTable = document.getElementById('propertiesTable');
+        const paymentsTable = document.getElementById('paymentsTable');
+        const activitiesTable = document.getElementById('activitiesTable');
+
+        // Menu links
+        const menuLinks = document.querySelectorAll('.sidebar-menu a');
+
+        // Login functionality
+        loginForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            
+            if (email === DEMO_EMAIL && password === DEMO_PASSWORD) {
+                loginPage.style.display = 'none';
+                adminDashboard.style.display = 'flex';
+                loginError.style.display = 'none';
+                
+                // Initialize dashboard with data
+                initializeDashboard();
+            } else {
+                loginError.style.display = 'block';
+            }
+        });
+        
+        // Logout functionality
+        function handleLogout(e) {
+            if (e) e.preventDefault();
+            AuthService.logout();
+            window.location.href = 'login.html';
+        }
+
+        // Add logout listeners after DOM load
+        document.addEventListener('DOMContentLoaded', () => {
+            const sidebarLogoutBtn = document.getElementById('sidebarLogoutBtn');
+            const dropdownLogoutBtn = document.getElementById('dropdownLogoutBtn');
+            if (sidebarLogoutBtn) sidebarLogoutBtn.addEventListener('click', handleLogout);
+            if (dropdownLogoutBtn) dropdownLogoutBtn.addEventListener('click', handleLogout);
+        });
+        
+        // Sidebar toggle for mobile
+        sidebarToggle.addEventListener('click', function() {
+            document.body.classList.toggle('sidebar-open');
+        });
+        
+        // Menu navigation
+        menuLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Handle logout separately
+                if (this.id === 'logoutBtn') return;
+                
+                // Update active menu item
+                menuLinks.forEach(item => item.classList.remove('active'));
+                this.classList.add('active');
+                
+                // Show the corresponding section
+                const sectionId = this.getAttribute('data-section') + 'Section';
+                contentSections.forEach(section => section.style.display = 'none');
+                document.getElementById(sectionId).style.display = 'block';
+                
+                // Update page title
+                pageTitle.textContent = this.querySelector('span').textContent;
+            });
+        });
+        
+        // Theme toggle functionality
+        themeToggle.addEventListener('change', function() {
+            if (this.checked) {
+                document.body.classList.add('dark-mode');
+                themeLabel.textContent = 'Light Mode';
+            } else {
+                document.body.classList.remove('dark-mode');
+                themeLabel.textContent = 'Dark Mode';
+            }
+        });
+        
+        // Save settings
+        saveSettings.addEventListener('click', function() {
+            const toast = document.createElement('div');
+            toast.className = 'alert alert-success alert-dismissible fade show';
+            toast.innerHTML = `
+                <strong>Settings saved!</strong> Your platform settings have been updated.
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            `;
+            document.querySelector('.admin-content').prepend(toast);
+        });
+        
+        // Save security settings
+        saveSecurity.addEventListener('click', function() {
+            const toast = document.createElement('div');
+            toast.className = 'alert alert-success alert-dismissible fade show';
+            toast.innerHTML = `
+                <strong>Security settings saved!</strong> Your security preferences have been updated.
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            `;
+            document.querySelector('.admin-content').prepend(toast);
+        });
+        
+        // Chat functionality
+        chatModal.addEventListener('show.bs.modal', function(event) {
+            const button = event.relatedTarget;
+            const userName = button.getAttribute('data-user');
+            chatUserName.textContent = userName;
+            
+            // Clear chat messages except the initial ones
+            while (chatMessages.children.length > 3) {
+                chatMessages.removeChild(chatMessages.lastChild);
+            }
+        });
+        
+        sendMessageBtn.addEventListener('click', function() {
+            if (chatInput.value.trim() !== '') {
+                // Add user message
+                const userMessage = document.createElement('div');
+                userMessage.className = 'message user';
+                userMessage.textContent = chatInput.value;
+                chatMessages.appendChild(userMessage);
+                
+                // Simulate admin response after a short delay
+                setTimeout(() => {
+                    const adminMessage = document.createElement('div');
+                    adminMessage.className = 'message admin';
+                    adminMessage.textContent = 'Thanks for your message. We will get back to you shortly.';
+                    chatMessages.appendChild(adminMessage);
+                    chatMessages.scrollTop = chatMessages.scrollHeight;
+                }, 1000);
+                
+                // Clear input
+                chatInput.value = '';
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }
+        });
+        
+        chatInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendMessageBtn.click();
+            }
+        });
+        
+        // Refresh data button
+        refreshDataBtn.addEventListener('click', function() {
+            // Simulate data refresh
+            const toast = document.createElement('div');
+            toast.className = 'alert alert-info alert-dismissible fade show';
+            toast.innerHTML = `
+                <strong>Data refreshed!</strong> All statistics have been updated.
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            `;
+            document.querySelector('.admin-content').prepend(toast);
+            
+            // Update some random data to simulate refresh
+            updateRandomData();
+        });
+        
+        // Generate report button
+        generateReportBtn.addEventListener('click', function() {
+            // Simulate report generation
+            const toast = document.createElement('div');
+            toast.className = 'alert alert-success alert-dismissible fade show';
+            toast.innerHTML = `
+                <strong>Report generated!</strong> Your report is ready for download.
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            `;
+            document.querySelector('.admin-content').prepend(toast);
+        });
+        
+        // Save user button
+        saveUserBtn.addEventListener('click', function() {
+            const userName = document.getElementById('userName').value;
+            const userEmail = document.getElementById('userEmail').value;
+            const userRole = document.getElementById('userRole').value;
+            const userStatus = document.getElementById('userStatus').value;
+            
+            if (userName && userEmail && userRole) {
+                // Add new user to table
+                const newRow = document.createElement('tr');
+                newRow.innerHTML = `
+                    <td>${userName}</td>
+                    <td>${userEmail}</td>
+                    <td>${userRole}</td>
+                    <td><span class="status-badge status-${userStatus}">${userStatus.charAt(0).toUpperCase() + userStatus.slice(1)}</span></td>
+                    <td>${new Date().toLocaleDateString()}</td>
+                    <td>
+                        <button class="btn-admin btn-view"><i class="fas fa-eye"></i></button>
+                        <button class="btn-admin btn-edit"><i class="fas fa-edit"></i></button>
+                        <button class="btn-admin btn-chat" data-bs-toggle="modal" data-bs-target="#chatModal" data-user="${userName}"><i class="fas fa-comment"></i></button>
+                        <button class="btn-admin btn-delete"><i class="fas fa-trash"></i></button>
+                    </td>
+                `;
+                usersTable.appendChild(newRow);
+                
+                // Update user count
+                totalUsers.textContent = (parseInt(totalUsers.textContent) + 1).toString();
+                
+                // Close modal
+                bootstrap.Modal.getInstance(document.getElementById('addUserModal')).hide();
+                
+                // Show success message
+                const toast = document.createElement('div');
+                toast.className = 'alert alert-success alert-dismissible fade show';
+                toast.innerHTML = `
+                    <strong>Success!</strong> User "${userName}" has been added.
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                `;
+                document.querySelector('.admin-content').prepend(toast);
+                
+                // Reset form
+                document.getElementById('addUserForm').reset();
+            }
+        });
+        
+        // Save property button
+        savePropertyBtn.addEventListener('click', function() {
+            const propertyTitle = document.getElementById('propertyTitle').value;
+            const propertyAddress = document.getElementById('propertyAddress').value;
+            const propertyType = document.getElementById('propertyType').value;
+            const propertyPrice = document.getElementById('propertyPrice').value;
+            const propertyStatus = document.getElementById('propertyStatus').value;
+            const propertyImagesInput = document.getElementById('propertyImages');
+            const propertyImages = propertyImagesInput.files;
+            if (propertyTitle && propertyAddress && propertyType && propertyPrice && propertyImages.length > 0) {
+                // Add new property to table (show first image as thumbnail)
+                let imageCell = '';
+                if (propertyImages.length > 0) {
+                    const reader = new FileReader();
+                    reader.onload = function(ev) {
+                        imageCell = `<img src='${ev.target.result}' style='width:50px;height:50px;object-fit:cover;border-radius:6px;' alt='Property Image'>`;
+                        const newRow = document.createElement('tr');
+                        newRow.innerHTML = `
+                            <td>${imageCell}</td>
+                            <td>${propertyTitle}</td>
+                            <td>${propertyAddress}</td>
+                            <td>${propertyType.charAt(0).toUpperCase() + propertyType.slice(1)}</td>
+                            <td>$${propertyPrice}/mo</td>
+                            <td><span class="status-badge status-${propertyStatus}">${propertyStatus.charAt(0).toUpperCase() + propertyStatus.slice(1)}</span></td>
+                            <td>
+                                <button class="btn-admin btn-view"><i class="fas fa-eye"></i></button>
+                                <button class="btn-admin btn-edit"><i class="fas fa-edit"></i></button>
+                                <button class="btn-admin btn-delete"><i class="fas fa-trash"></i></button>
+                            </td>
+                        `;
+                        propertiesTable.appendChild(newRow);
+                        // Update property count
+                        totalProperties.textContent = (parseInt(totalProperties.textContent) + 1).toString();
+                        // Close modal
+                        bootstrap.Modal.getInstance(document.getElementById('addPropertyModal')).hide();
+                        // Show success message
+                        const toast = document.createElement('div');
+                        toast.className = 'alert alert-success alert-dismissible fade show';
+                        toast.innerHTML = `
+                            <strong>Success!</strong> Property "${propertyTitle}" has been added.
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                        `;
+                        document.querySelector('.admin-content').prepend(toast);
+                        // Reset form
+                        document.getElementById('addPropertyForm').reset();
+                        document.getElementById('propertyImagePreview').innerHTML = '';
+                    };
+                    reader.readAsDataURL(propertyImages[0]);
+                }
+            } else {
+                alert('Please fill in all required fields and add at least one image.');
+            }
+    });
+
+        // Image preview for property images (outside event handler)
+        document.getElementById('propertyImages').addEventListener('change', function(e) {
+            const preview = document.getElementById('propertyImagePreview');
+            preview.innerHTML = '';
+            Array.from(e.target.files).forEach(file => {
+                const reader = new FileReader();
+                reader.onload = function(ev) {
+                    const img = document.createElement('img');
+                    img.src = ev.target.result;
+                    img.className = 'rounded border';
+                    img.style.width = '70px';
+                    img.style.height = '70px';
+                    img.style.objectFit = 'cover';
+                    preview.appendChild(img);
+                };
+                reader.readAsDataURL(file);
+            });
+        });
+        
+        // Initialize dashboard with data
+        function initializeDashboard() {
+            // Set up event listeners for action buttons
+            document.querySelectorAll('.btn-delete').forEach(button => {
+                button.addEventListener('click', function() {
+                    const row = this.closest('tr');
+                    const name = row.querySelector('td:first-child').textContent;
+                    
+                    if (confirm(`Are you sure you want to delete ${name}?`)) {
+                        row.remove();
+                        
+                        // Show deletion message
+                        const toast = document.createElement('div');
+                        toast.className = 'alert alert-warning alert-dismissible fade show';
+                        toast.innerHTML = `
+                            <strong>Deleted!</strong> ${name} has been removed.
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                        `;
+                        document.querySelector('.admin-content').prepend(toast);
+                    }
+                });
+            });
+            
+            // Set up event listeners for view buttons
+            document.querySelectorAll('.btn-view').forEach(button => {
+                button.addEventListener('click', function() {
+                    const row = this.closest('tr');
+                    const name = row.querySelector('td:first-child').textContent;
+                    
+                    // Show view message
+                    const toast = document.createElement('div');
+                    toast.className = 'alert alert-info alert-dismissible fade show';
+                    toast.innerHTML = `
+                        <strong>Viewing:</strong> Details for ${name} would be displayed here.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    `;
+                    document.querySelector('.admin-content').prepend(toast);
+                });
+            });
+            
+            // Set up event listeners for edit buttons
+            document.querySelectorAll('.btn-edit').forEach(button => {
+                button.addEventListener('click', function() {
+                    const row = this.closest('tr');
+                    const name = row.querySelector('td:first-child').textContent;
+                    
+                    // Show edit message
+                    const toast = document.createElement('div');
+                    toast.className = 'alert alert-info alert-dismissible fade show';
+                    toast.innerHTML = `
+                        <strong>Editing:</strong> Edit form for ${name} would be displayed here.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    `;
+                    document.querySelector('.admin-content').prepend(toast);
+                });
+            });
+            
+            // Simulate API request count updates
+            setInterval(() => {
+                const currentCount = parseInt(apiRequests.textContent.replace(/[^0-9]/g, ''));
+                const newCount = currentCount + Math.floor(Math.random() * 10) - 3;
+                apiRequests.textContent = `${Math.max(1000, newCount)}/min`;
+            }, 5000);
+        }
+        
+        // Update random data to simulate live updates
+        function updateRandomData() {
+            // Randomly adjust user count
+            const userChange = Math.floor(Math.random() * 5) - 2;
+            const currentUsers = parseInt(totalUsers.textContent);
+            totalUsers.textContent = Math.max(1000, currentUsers + userChange).toString();
+            
+            // Randomly adjust property count
+            const propertyChange = Math.floor(Math.random() * 3);
+            const currentProperties = parseInt(totalProperties.textContent);
+            totalProperties.textContent = (currentProperties + propertyChange).toString();
+            
+            // Randomly adjust application count
+            const applicationChange = Math.floor(Math.random() * 10) - 4;
+            const currentApplications = parseInt(pendingApplications.textContent);
+            pendingApplications.textContent = Math.max(0, currentApplications + applicationChange).toString();
+            
+            // Randomly adjust revenue
+            const revenueChange = Math.floor(Math.random() * 1000);
+            const currentRevenue = parseInt(totalRevenue.textContent.replace(/[^0-9]/g, ''));
+            totalRevenue.textContent = `$${(currentRevenue + revenueChange).toLocaleString()}`;
+            
+            // Add a random activity
+            const activities = [
+                { user: 'New User', action: 'Account Registration', status: 'pending' },
+                { user: 'Property Owner', action: 'Listing Added', status: 'active' },
+                { user: 'Tenant', action: 'Application Submitted', status: 'pending' },
+                { user: 'System', action: 'Maintenance Completed', status: 'active' }
+            ];
+            
+            const activity = activities[Math.floor(Math.random() * activities.length)];
+            const newRow = document.createElement('tr');
+            newRow.innerHTML = `
+                <td>${activity.user}</td>
+                <td>${activity.action}</td>
+                <td>${new Date().toLocaleDateString()}</td>
+                <td><span class="status-badge status-${activity.status}">${activity.status.charAt(0).toUpperCase() + activity.status.slice(1)}</span></td>
+                <td>
+                    <button class="btn-admin btn-view"><i class="fas fa-eye"></i></button>
+                    <button class="btn-admin btn-edit"><i class="fas fa-edit"></i></button>
+                    <button class="btn-admin btn-chat" data-bs-toggle="modal" data-bs-target="#chatModal" data-user="${activity.user}"><i class="fas fa-comment"></i></button>
+                </td>
+            `;
+            
+            // Add to top of table and remove last row if more than 5
+            activitiesTable.insertBefore(newRow, activitiesTable.firstChild);
+            if (activitiesTable.children.length > 5) {
+                activitiesTable.removeChild(activitiesTable.lastChild);
+            }
+        }
+    </script>
+    <script src="js/auth-service.js"></script>
+    <script>
+        // Check if user is logged in as admin
+        document.addEventListener('DOMContentLoaded', () => {
+            try {
+                const { isAuthenticated, user } = AuthService.getCurrentUser();
+                if (!isAuthenticated || user.role !== 'admin') {
+                    window.location.href = 'login.html';
+                }
+            } catch (error) {
+                console.error('Auth check failed:', error);
+                window.location.href = 'login.html';
+            }
+        });
+    </script>
+</body>
+</html>

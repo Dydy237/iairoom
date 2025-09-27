@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KMER ROOM - Testimonials</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-green: #2ecc71;
+            --dark-green: #27ae60;
+            --accent-yellow: #f1c40f;
+            --light-color: #f8f9fa;
+            --dark-color: #212529;
+        }
+
+        body { background-color: #f8f9fa; }
+
+        .navbar {
+            background: rgba(255,255,255,0.98);
+            box-shadow: 0 2px 16px rgba(44, 204, 113, 0.08), 0 1.5px 8px rgba(39, 174, 96, 0.07);
+            padding: 12px 0;
+        }
+        .navbar-brand { color: var(--primary-green); font-weight: 700; }
+        .nav-link { color: var(--dark-color) !important; position: relative; }
+        .nav-link:hover { color: var(--primary-green) !important; }
+        .nav-link.active { color: var(--primary-green) !important; }
+        .logo-img { height: 44px; width: 44px; object-fit: contain; border-radius: 8px; background: #fff; }
+
+        .page-hero {
+            background: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)), url('images/1000195131.webp');
+            background-size: cover;
+            background-position: center;
+            color: #fff;
+            padding: 110px 0 90px;
+            text-align: center;
+        }
+        .page-hero h1 { font-weight: 800; }
+        .page-hero p { opacity: .95; }
+
+        .testimonial-card {
+            background: #fff;
+            border: 0;
+            border-radius: 14px;
+            box-shadow: 0 10px 24px rgba(0,0,0,0.08);
+            padding: 24px;
+            height: 100%;
+            transition: transform .2s, box-shadow .2s;
+        }
+        .testimonial-card:hover { transform: translateY(-4px); box-shadow: 0 14px 32px rgba(0,0,0,0.12); }
+        .testimonial-avatar { width: 70px; height: 70px; border-radius: 50%; object-fit: cover; border: 3px solid var(--primary-green); }
+        .rating i { color: #f1c40f; }
+
+        .quote-icon {
+            color: var(--primary-green);
+            opacity: .8;
+            font-size: 1.4rem;
+        }
+
+        .cta-strip {
+            background: linear-gradient(135deg, var(--primary-green), var(--dark-green));
+            color: #fff;
+            padding: 50px 0;
+            text-align: center;
+        }
+
+        footer {
+            background: linear-gradient(to bottom, #2c3e50, #1a2530);
+            color: white;
+            padding: 60px 0 20px;
+        }
+        .footer-links ul { list-style: none; padding: 0; margin: 0; }
+        .footer-links a { color: #ddd; text-decoration: none; }
+        .footer-links a:hover { color: var(--primary-green); }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="images/Generated Image September 09, 2025 - 2_11PM(1)(1).png" alt="KMER ROOM Logo" class="logo-img me-2">
+                KMER ROOM
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="how-it-works.html.html">How It Works</a></li>
+                    <li class="nav-item"><a class="nav-link" href="findrooms.html.html">Find Rooms</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="testimonials.html">Testimonials</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html.html">Contact</a></li>
+                </ul>
+                <div class="ms-lg-3 mt-3 mt-lg-0">
+                    <a href="login.html" class="btn btn-outline-success me-2">Log In</a>
+                    <a href="registe.html" class="btn btn-primary">Sign Up</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Hero -->
+    <section class="page-hero">
+        <div class="container">
+            <h1 class="display-5 mb-3">What Our Users Say</h1>
+            <p class="lead">Real stories from tenants and landlords who found success with KMER ROOM</p>
+        </div>
+    </section>
+
+    <!-- Testimonials Grid -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row g-4">
+                <!-- Testimonial 1 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="testimonial-card h-100">
+                        <div class="d-flex align-items-center mb-3">
+                            <img src="https://randomuser.me/api/portraits/women/65.jpg" class="testimonial-avatar me-3" alt="Avatar">
+                            <div>
+                                <h6 class="mb-0">Marie T.</h6>
+                                <small class="text-muted">Student, Yaoundé</small>
+                            </div>
+                        </div>
+                        <div class="rating mb-2">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="mb-0"><i class="fas fa-quote-left quote-icon me-2"></i>KMER ROOM saved me so much time! I found a perfect room near campus without dealing with unreliable agents.</p>
+                    </div>
+                </div>
+
+                <!-- Testimonial 2 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="testimonial-card h-100">
+                        <div class="d-flex align-items-center mb-3">
+                            <img src="https://randomuser.me/api/portraits/men/32.jpg" class="testimonial-avatar me-3" alt="Avatar">
+                            <div>
+                                <h6 class="mb-0">Jean P.</h6>
+                                <small class="text-muted">Landlord, AWAE Zone</small>
+                            </div>
+                        </div>
+                        <div class="rating mb-2">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="mb-0"><i class="fas fa-quote-left quote-icon me-2"></i>Posting and managing listings is simple. I quickly connected with serious tenants and reduced vacant time.</p>
+                    </div>
+                </div>
+
+                <!-- Testimonial 3 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="testimonial-card h-100">
+                        <div class="d-flex align-items-center mb-3">
+                            <img src="https://randomuser.me/api/portraits/women/45.jpg" class="testimonial-avatar me-3" alt="Avatar">
+                            <div>
+                                <h6 class="mb-0">Chantal M.</h6>
+                                <small class="text-muted">Young Professional</small>
+                            </div>
+                        </div>
+                        <div class="rating mb-2">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <p class="mb-0"><i class="fas fa-quote-left quote-icon me-2"></i>Payments were smooth and the verification gave me peace of mind. Found a great place quickly!</p>
+                    </div>
+                </div>
+
+                <!-- Testimonial 4 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="testimonial-card h-100">
+                        <div class="d-flex align-items-center mb-3">
+                            <img src="https://randomuser.me/api/portraits/men/76.jpg" class="testimonial-avatar me-3" alt="Avatar">
+                            <div>
+                                <h6 class="mb-0">Bernard K.</h6>
+                                <small class="text-muted">Parent</small>
+                            </div>
+                        </div>
+                        <div class="rating mb-2">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                        </div>
+                        <p class="mb-0"><i class="fas fa-quote-left quote-icon me-2"></i>Helped my daughter find a safe and affordable room close to school. Highly recommended.</p>
+                    </div>
+                </div>
+
+                <!-- Testimonial 5 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="testimonial-card h-100">
+                        <div class="d-flex align-items-center mb-3">
+                            <img src="https://randomuser.me/api/portraits/women/22.jpg" class="testimonial-avatar me-3" alt="Avatar">
+                            <div>
+                                <h6 class="mb-0">Flora A.</h6>
+                                <small class="text-muted">Tenant</small>
+                            </div>
+                        </div>
+                        <div class="rating mb-2">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="mb-0"><i class="fas fa-quote-left quote-icon me-2"></i>Filters made it easy to narrow down options. Viewing appointment was confirmed instantly.</p>
+                    </div>
+                </div>
+
+                <!-- Testimonial 6 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="testimonial-card h-100">
+                        <div class="d-flex align-items-center mb-3">
+                            <img src="https://randomuser.me/api/portraits/men/12.jpg" class="testimonial-avatar me-3" alt="Avatar">
+                            <div>
+                                <h6 class="mb-0">Serge N.</h6>
+                                <small class="text-muted">Landlord</small>
+                            </div>
+                        </div>
+                        <div class="rating mb-2">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                        </div>
+                        <p class="mb-0"><i class="fas fa-quote-left quote-icon me-2"></i>Verified tenant profiles reduced no-shows. The process is a breeze.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Strip -->
+    <section class="cta-strip">
+        <div class="container">
+            <h2 class="mb-3">Ready to share your story?</h2>
+            <p class="mb-4">Join thousands of satisfied users who have found success with KMER ROOM.</p>
+            <a href="registe.html" class="btn btn-light text-success fw-semibold me-2">Create an Account</a>
+            <a href="findrooms.html.html" class="btn btn-outline-light">Browse Rooms</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <h4 class="text-white mb-3"><i class="fas fa-home me-2"></i>KMER ROOM</h4>
+                    <p class="mb-3">The trusted platform for room rentals in Cameroon's AWAE Zone. Verified listings, secure payments, and direct communication.</p>
+                    <div class="d-flex gap-2">
+                        <a href="#" class="text-white-50"><i class="fab fa-facebook fa-lg"></i></a>
+                        <a href="#" class="text-white-50"><i class="fab fa-twitter fa-lg"></i></a>
+                        <a href="#" class="text-white-50"><i class="fab fa-instagram fa-lg"></i></a>
+                        <a href="#" class="text-white-50"><i class="fab fa-linkedin fa-lg"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4 mb-4 footer-links">
+                    <h6 class="text-uppercase text-white-50">Quick Links</h6>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="#">Testimonials</a></li>
+                        <li><a href="findrooms.html.html">Find Rooms</a></li>
+                        <li><a href="rental-guide.html">Rental Guide</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-4 mb-4 footer-links">
+                    <h6 class="text-uppercase text-white-50">For Tenants</h6>
+                    <ul>
+                        <li><a href="search-tips.html">Search Tips</a></li>
+                        <li><a href="safety-tips.html">Safety Tips</a></li>
+                        <li><a href="faq.html">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-4 mb-4 footer-links">
+                    <h6 class="text-uppercase text-white-50">For Landlords</h6>
+                    <ul>
+                        <li><a href="pricing.html.html">Pricing</a></li>
+                        <li><a href="landlord-guide.html.html">Landlord Guide</a></li>
+                        <li><a href="success-stories.html">Success Stories</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-12 footer-links">
+                    <h6 class="text-uppercase text-white-50">Contact</h6>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt me-2"></i> AWAE Zone, Yaoundé</li>
+                        <li><i class="fas fa-phone me-2"></i> +237 6XX XXX XXX</li>
+                        <li><i class="fas fa-envelope me-2"></i> info@kmerroom.com</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
